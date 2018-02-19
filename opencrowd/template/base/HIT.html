@@ -1,0 +1,76 @@
+<HTMLQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2011-11-11/HTMLQuestion.xsd">
+    <HTMLContent><![CDATA[
+        <!DOCTYPE html>
+<head>
+    {% include "imports.html" %}
+    <style>
+        {%- include "arch.css" -%}
+    </style>
+
+</head>
+
+<body>
+<!-- TRULIA HEADER -->
+{% include "header.html" %}
+
+<!-- OVERVIEW -->
+{#        {% include "overview.html" %}#}
+{##}
+{#        <!-- PREVIEW PAGE -->#}
+{#        {% include "" %}#}
+{##}
+{#        <!-- INSTRUCTIONS -->#}
+{#        {% include "" %}#}
+{#        {% include "" %}#}
+{#        {% include "" %}#}
+{#        {% include "" %}#}
+{#        {% include "" %}#}
+<!-- MAIN PAGE -->
+<div class="container">
+    <div class="main_page">
+        <form name='mturk_form' method="post" id='mturk_form' action="{{ jinja_form_action }}">
+            <input type='hidden' value='' name='assignmentId' id='assignmentId'/>
+            <input type='hidden' value='' name='hitId' id='hitId'/>
+            <input type='hidden' value='' name='jsonObject' id='jsonObject'/>
+{#            {% for question in HIT.questions %}{% for section in question.sections %}#}
+{#            {{ section.render() }}#}
+{#            {% endfor %}{% endfor %}#}
+                <div id="dynamic">
+                    <div id="anchor"></div>
+                </div>
+{#            {% for unique_section_id in HIT.unique_render_information %}#}
+{#                    {{ HIT.unique_render_information[unique_section_id]['render_function']() }}#}
+{#            {% endfor %}#}
+            <input class='btn btn-warning' id='back-button' value='Back'>
+            <input class='btn btn-success' id='next-button' value='Next'>
+            <input class='btn btn-primary' id='submit-button' type='submit' value='Submit'>
+
+
+        </form>
+        <div id="suggestion_box" class="form-group animated fadeInUp">
+            <label for="suggestion_text">How can we make this HIT better for you? These are read and implemented if
+                possible!</label>
+            <input type="text" class="form-control" id="suggestion_text"
+                   placeholder="How can we make this HIT better for you?">
+        </div>
+        <div class="row text-center blue_info">
+            <h4 class="question_counter"></h4>
+        </div>
+
+
+
+    </div>
+    <script>
+         {%- include "arch.js" -%}
+    </script>
+</div>
+
+</body>
+        </html>
+        ]]>
+    </HTMLContent>
+    <FrameHeight>900</FrameHeight>
+</HTMLQuestion>
+
+
+

@@ -1,0 +1,94 @@
+"""
+.. module:: bounding_box
+   :platform: Unix, Mac
+   :synopsis: Have workers draw bounding boxes on an image
+
+Have workers draw bounding boxes on an image
+
+.. moduleauthor:: Michael Romero <michaelrom@zillowgroup.com>
+
+
+"""
+
+import jinja2
+import section
+import uuid
+from opencrowd.config.opencrowd import TEMPLATES_DIR
+
+
+class BoundingBox(section.Section):
+    """
+    Create and manage a new BoundingBox section. The BoundingBox section consists
+    of an image, with a jcrop instance running on top of the image. This allows the
+    user to manipulate and draw boxes on top of the image.
+
+    :param url: image location to run the bounding box on
+    :type url: str
+    :param hidden: if this section should initially be visible, or if it will appear later due to a parent being activated
+    :type hidden: bool
+    :param opencrowd_id: must be unique, will default to a uuid
+    :type opencrowd_id: str
+    """
+
+    def __init__(self, url=None, hidden=False, opencrowd_id=None):
+
+        super(BoundingBox, self).__init__(opencrowd_id=opencrowd_id, hidden=hidden)
+        if url is None:
+            url = ''
+        self.url = url
+
+    def to_json(self):
+        json_obj = {'type': 'BoundingBox',
+                    'url': self.url}
+        json_obj.update(super(BoundingBox, self).to_json())
+        return json_obj
+
+
+    # def get_load_function(self):
+    #     env = jinja2.Environment(trim_blocks=True, lstrip_blocks=True)
+    #     env.loader = jinja2.FileSystemLoader(TEMPLATES_DIR + 'section/' + "BoundingBox")
+    #     template = env.get_template('load.js')
+    #     return template.render()
+
+    def render(self):
+        env = jinja2.Environment(trim_blocks=True, lstrip_blocks=True)
+        env.loader = jinja2.FileSystemLoader(TEMPLATES_DIR + 'section/' + "BoundingBox")
+        template = env.get_template('BoundingBox.html')
+        return template.render(BoundingBox=self)
+
+    def dynamicGenerateGraphLogic(self):
+        return "if (node.type == \"BoundingBox\") {\n\
+            var html_template = generate_boundingbox(node, root_id);\n\
+            $(\"#\"+anchor_id).after(html_template);\n\
+            generate_bounding_box(root_id)\n\
+        }"
+
+    def staticGenerateGraphLogic(self):
+        env = jinja2.Environment(trim_blocks=True, lstrip_blocks=True)
+        env.loader = jinja2.FileSystemLoader(TEMPLATES_DIR + 'section/' + "BoundingBox")
+        template = env.get_template('graph.js')
+        return template.render()
+
+    def set_url(self, url):
+        """set the url of the image that will be displayed for the bounding box operation.
+
+        :param url: the url address of the image.
+        :type url: str.
+        """
+
+        self.url = url
+
+    def call_save_function(self):
+        return "saveBoundingBox(current_answer);"
+
+    def generate_save_function(self):
+        env = jinja2.Environment(trim_blocks=True, lstrip_blocks=True)
+        env.loader = jinja2.FileSystemLoader(TEMPLATES_DIR + 'section/' + "BoundingBox")
+        template = env.get_template('saveFunction.js')
+        return template.render()
+
+
+if __name__ == '__main__':
+    bounding_box = BoundingBox()
+    bounding_box.set_url("http://lorempixel.com/800/400/nature")
+    print bounding_box.render()

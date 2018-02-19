@@ -1,0 +1,5 @@
+<div id="div_{{ Wrapper.get_id() }}" class="arch_groups row animated fadeInUp">
+    {% for section in Wrapper.sections %}
+        {{ section.render() }}
+    {% endfor %}
+</div>

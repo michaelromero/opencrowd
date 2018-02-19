@@ -1,0 +1,259 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Amazon Mechanical Turk &#8212; opencrowd 1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Database" href="database.html" />
+    <link rel="prev" title="Crowd" href="crowd.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-opencrowd.model.crowd.amazonmechanicalturk">
+<span id="id1"></span><span id="amazon-mechanical-turk"></span><h1>Amazon Mechanical Turk<a class="headerlink" href="#module-opencrowd.model.crowd.amazonmechanicalturk" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-amazonmechanicalturk"></span><p>Provides an interface with amazon mechanical turk to push opencrowd generated
+HITs. Amazon Mechanical Turk account specifications are defined in
+opencrowd/config/opencrowd.</p>
+<dl class="class">
+<dt id="opencrowd.model.crowd.amazonmechanicalturk.AmazonMechanicalTurk">
+<em class="property">class </em><code class="descclassname">opencrowd.model.crowd.amazonmechanicalturk.</code><code class="descname">AmazonMechanicalTurk</code><span class="sig-paren">(</span><em>endpoint</em>, <em>form_submission_action</em>, <em>region_name</em>, <em>aws_access_key_id</em>, <em>aws_secret_access_key</em><span class="sig-paren">)</span><a class="headerlink" href="#opencrowd.model.crowd.amazonmechanicalturk.AmazonMechanicalTurk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides the python library Boto3 with the AWS information needed to start
+a connection</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>endpoint</strong> (<em>str</em>) – Pointing to either the AMT sandbox or production servers</li>
+<li><strong>form_submission_action</strong> (<em>str</em>) – needs to match with the endpoint, this will    either submit to the sandbox or production</li>
+<li><strong>region_name</strong> (<em>str</em>) – generally ‘us-east-1’</li>
+<li><strong>aws_access_key_id</strong> (<em>str</em>) – The aws access key, available on your aws account</li>
+<li><strong>aws_secret_access_key</strong> (<em>str</em>) – available on your aws account</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="opencrowd.model.crowd.amazonmechanicalturk.AmazonMechanicalTurk.approve_assignment_ids">
+<code class="descname">approve_assignment_ids</code><span class="sig-paren">(</span><em>assignment_ids</em><span class="sig-paren">)</span><a class="headerlink" href="#opencrowd.model.crowd.amazonmechanicalturk.AmazonMechanicalTurk.approve_assignment_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Approve an assignment on AMT. This will pay the worker the reward
+amount for the Task.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>assignment_ids</strong> (<em>list</em>) – assignment ids to approve on AMT</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencrowd.model.crowd.amazonmechanicalturk.AmazonMechanicalTurk.delete_sandbox">
+<code class="descname">delete_sandbox</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opencrowd.model.crowd.amazonmechanicalturk.AmazonMechanicalTurk.delete_sandbox" title="Permalink to this definition">¶</a></dt>
+<dd><p>delete all HITs on the sandbox. useful for testing</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencrowd.model.crowd.amazonmechanicalturk.AmazonMechanicalTurk.gather_submitted_assignments">
+<code class="descname">gather_submitted_assignments</code><span class="sig-paren">(</span><em>hit_id</em><span class="sig-paren">)</span><a class="headerlink" href="#opencrowd.model.crowd.amazonmechanicalturk.AmazonMechanicalTurk.gather_submitted_assignments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gather ‘submitted’ assignments under this HIT</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>hit_id</strong> – gather assignments from this HIT</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of assignment ids (they were updated in-place)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencrowd.model.crowd.amazonmechanicalturk.AmazonMechanicalTurk.generate_crowdsource_connection">
+<code class="descname">generate_crowdsource_connection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opencrowd.model.crowd.amazonmechanicalturk.AmazonMechanicalTurk.generate_crowdsource_connection" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boto3 mturk client</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencrowd.model.crowd.amazonmechanicalturk.AmazonMechanicalTurk.get_assignment">
+<code class="descname">get_assignment</code><span class="sig-paren">(</span><em>AssignmentId</em><span class="sig-paren">)</span><a class="headerlink" href="#opencrowd.model.crowd.amazonmechanicalturk.AmazonMechanicalTurk.get_assignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a specific assignment</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>AssignmentId</strong> (<em>str</em>) – id of the assignment to retrieve</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencrowd.model.crowd.amazonmechanicalturk.AmazonMechanicalTurk.get_hit">
+<code class="descname">get_hit</code><span class="sig-paren">(</span><em>HITId</em><span class="sig-paren">)</span><a class="headerlink" href="#opencrowd.model.crowd.amazonmechanicalturk.AmazonMechanicalTurk.get_hit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a specific HIT</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>HITId</strong> (<em>str</em>) – id of the HIT to retrieve</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Amazon HIT dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencrowd.model.crowd.amazonmechanicalturk.AmazonMechanicalTurk.list_assignments_for_hit">
+<code class="descname">list_assignments_for_hit</code><span class="sig-paren">(</span><em>hit_id</em><span class="sig-paren">)</span><a class="headerlink" href="#opencrowd.model.crowd.amazonmechanicalturk.AmazonMechanicalTurk.list_assignments_for_hit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gather assignments for this HIT</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>hit_id</strong> – gather assignments from this HIT</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of AMT assignment dicts</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencrowd.model.crowd.amazonmechanicalturk.AmazonMechanicalTurk.list_hits">
+<code class="descname">list_hits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opencrowd.model.crowd.amazonmechanicalturk.AmazonMechanicalTurk.list_hits" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all HITs on AMT</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of Amazon HIT dicts</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">opencrowd</a></h1>
+
+
+
+<p class="blurb">easy, powerful, opensource crowdsourcing</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=michaelromero&repo=config&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<a href="../../index.html">
+    <p></p>
+</a>
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial (for developers)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Philosophy &amp; License</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="base.html">Base Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../academics.html">Crowdsourcing Assistance for Academics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../future.html">Future Work</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use Cases</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="base.html">Base Components</a><ul>
+  <li><a href="crowd.html">Crowd</a><ul>
+      <li>Previous: <a href="crowd.html" title="previous chapter">Crowd</a></li>
+      <li>Next: <a href="database.html" title="next chapter">Database</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Michael Romero.
+      
+      |
+      <a href="../../_sources/dev/base/amazon_mechanical_turk.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

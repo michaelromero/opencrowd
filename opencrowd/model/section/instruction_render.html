@@ -1,0 +1,570 @@
+<HTMLQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2011-11-11/HTMLQuestion.xsd">
+    <HTMLContent><![CDATA[
+        <!DOCTYPE html>
+<head>
+<script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/readable/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-Li5uVfY2bSkD3WQyiHX8tJd0aMF91rMrQP5aAewFkHkVSTT2TmD2PehZeMmm7aiL" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha256-gL1ibrbVcRIHKlCO5OXOPC/lZz/gpdApgQAzskqqXp8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-jcrop/2.0.4/js/Jcrop.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-jcrop/2.0.4/css/Jcrop.css">    <style>.col-md-3 {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.col-md-4 {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.col-md-6 {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.col-md-12 {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+ul {
+    padding: 0;
+}
+
+#site-header {
+    background: #20c063;
+    color: #fff;
+}
+
+.navbar-brand {
+    background: url(http://static.trulia-cdn.com/images/logos/standardized/v2/Trulia_Logo_Reverse_White.svg) no-repeat;
+    background-size: 80px 25px;
+    background-position: 0 center;
+    display: block;
+    height: 45px;
+    line-height: 45px;
+    text-indent: -9999px;
+    width: 80px;
+}
+
+#mturk_form ul {
+    list-style: none;
+}
+
+.items-compared {
+    text-align: center;
+}
+
+.items-compared img {
+    height: auto;
+    width: auto;
+    margin: 20px auto;
+    max-height: 500px;
+}
+
+.items-compared p {
+    background: #f3f3f3;
+    border: solid 2px #252525;
+    color: #252525;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 40px auto 20px auto;
+    padding: 4%;
+    width: 80%;
+}
+
+.select-answer li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-right-width: 5px;
+    border-radius: 3px;
+}
+
+.bs-callout h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.bs-callout p:last-child {
+    margin-bottom: 0;
+}
+
+.bs-callout code {
+    border-radius: 3px;
+}
+
+.bs-callout + .bs-callout {
+    margin-top: -5px;
+}
+
+.bs-callout-default {
+    border-left-color: #777;
+}
+
+.bs-callout-default h4 {
+    color: #777;
+}
+
+.bs-callout-primary {
+    border-left-color: #428bca;
+    border-right-color: #428bca;
+
+}
+
+.bs-callout-primary h4 {
+    color: #428bca;
+}
+
+.bs-callout-success {
+    border-left-color: #5cb85c;
+}
+
+.bs-callout-success h4 {
+    color: #5cb85c;
+}
+
+.bs-callout-danger {
+    border-left-color: #d9534f;
+}
+
+.bs-callout-danger h4 {
+    color: #d9534f;
+}
+
+.bs-callout-warning {
+    border-left-color: #f0ad4e;
+}
+
+.bs-callout-warning h4 {
+    color: #f0ad4e;
+}
+
+.bs-callout-info {
+    border-left-color: #5bc0de;
+    border-right-color: #5bc0de;
+
+}
+
+.bs-callout-info h4 {
+    color: #5bc0de;
+}
+
+.fixed_element_bottom {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}
+
+.dark_blue_info {
+    padding: 15px;
+    margin: 10px;
+    margin-bottom: 20px;
+    color: #fff;
+    background-color: #5bc0de;
+    border: 1px solid #46b8da;
+    border-radius: 4px;
+}
+
+.blue_info {
+    padding: 15px;
+    margin: 10px;
+    color: #31708f;
+    background-color: #d9edf7;
+    border: 1px solid #bce8f1;
+    border-radius: 4px;
+}
+
+.jcrop-box {
+    outline: 1px #17f900 solid;
+}
+
+.jcrop-box:focus {
+    outline: 1px #F90C00 solid;
+}
+
+pre {
+    outline: 1px solid #ccc;
+    padding: 5px;
+    margin: 5px;
+}
+
+.string {
+    color: green;
+}
+
+.number {
+    color: darkorange;
+}
+
+.boolean {
+    color: blue;
+}
+
+.null {
+    color: magenta;
+}
+
+.key {
+    color: red;
+}
+</style>
+
+</head>
+
+<body>
+<!-- TRULIA HEADER -->
+<div id="site-header"><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="#">Trulia</a></div></div></div>
+<!-- OVERVIEW -->
+        <div id="9c6a507e-e22c-4b7e-a3f3-15531feb410e" class="arch_groups row animated fadeInUp bs-callout bs-callout-default">
+    <h4>Title_a</h4>
+    <p>Paragraph 1a</p>
+    <p>Paragraph 2a</p>
+</div>
+<!-- MAIN PAGE -->
+<div class="container">
+    <div class="main_page">
+        <form name='mturk_form' method="post" id='mturk_form' action="pass">
+            <input type='hidden' value='' name='assignmentId' id='assignmentId'/>
+            <input type='hidden' value='' name='hitId' id='hitId'/>
+            <input type='hidden' value='' name='jsonObject' id='jsonObject'/>
+                <div id="dynamic">
+                    <div id="anchor"></div>
+                </div>
+            <input class='btn btn-warning' id='back-button' value='Back'>
+            <input class='btn btn-success' id='next-button' value='Next'>
+            <input class='btn btn-primary' id='submit-button' type='submit' value='Submit'>
+
+
+        </form>
+        <div id="suggestion_box" class="form-group animated fadeInUp">
+            <label for="suggestion_text">How can we make this HIT better for you? These are read and implemented if
+                possible!</label>
+            <input type="text" class="form-control" id="suggestion_text"
+                   placeholder="How can we make this HIT better for you?">
+        </div>
+        <div class="row text-center blue_info">
+            <h4 class="question_counter"></h4>
+        </div>
+
+
+
+    </div>
+    <script>var data = [
+    {
+        "9c6a507e-e22c-4b7e-a3f3-15531feb410e": {
+            "text": [
+                "Paragraph 1a", 
+                "Paragraph 2a"
+            ], 
+            "main_title": "Title_a", 
+            "type": "TextBox", 
+            "parents": "root", 
+            "callout_type": "default"
+        }, 
+        "root": "9c6a507e-e22c-4b7e-a3f3-15531feb410e", 
+        "question_id": "dcb007f1-0fd2-4c9b-963e-ade8692b0dd2"
+    }
+];
+var i = 0;
+var answers = [];
+var coordinates = {};
+var jcrop_apis = {};
+
+$(document).ready(function () {
+    init();
+
+    $("#next-button").on("click", function () {
+        document.getElementById("site-header").scrollIntoView();
+        saveData(i);
+        clear_html()
+        killBoundingBoxes(i)
+        i += 1;
+        buttonRefresh(i);
+        resetFormat();
+        reorderDivs(i);
+        loadQuestionFormat(i);
+    });
+    $("#back-button").on("click", function () {
+        document.getElementById("site-header").scrollIntoView();
+        //saveData();
+        clear_html()
+        killBoundingBoxes(i)
+        i -= 1;
+        buttonRefresh(i);
+        resetFormat();
+        reorderDivs(i);
+        loadQuestionFormat(i);
+    });
+    $('#mturk_form').submit(function () {
+        saveData(i);
+        getAmazonData();
+        return true;
+    });
+
+    // radio handlers
+    $(document).on('click', 'input[type="radio"]', function () {
+        // Processing only those that match the name attribute of the currently clicked button...
+        $('input[name="' + $(this).attr('name') + '"]').not($(this)).trigger('deselect'); // Every member of the current radio group except the clicked one...
+        var children = $(this).data("children");
+        var parent_id = $(this).attr('name');
+        for (var child_idx = 0; child_idx < children.length; child_idx++) {
+            dynamicGenerateGraph(data[i], children[child_idx], parent_id)
+        }
+
+    });
+
+    $(document).on('deselect', 'input[type="radio"]', function () {
+        var id = $(this).attr('name');
+        var children = $(this).data("children");
+        for(var child_idx = 0; child_idx < children.length; child_idx++) {
+                deleteDag(children[child_idx]);
+            }
+
+    })
+
+    $(document).on('change', 'input[type="checkbox"]', function () {
+        var check = $(this).prop("checked");
+        var children = $(this).data("children");
+        var button_id = $(this).attr('id');
+        var parent_id = $(this).attr('name');
+        if(check){
+            for(var child_idx = 0; child_idx < children.length; child_idx++){
+                dynamicGenerateGraph(data[i], children[child_idx], parent_id)
+            }
+        }
+        else{
+            for(var child_idx = 0; child_idx < children.length; child_idx++) {
+                deleteDag(children[child_idx]);
+            }
+        }
+    });
+});
+
+function deleteDag(button_id){
+    var node = data[i][button_id];
+    if(node.type == "BoundingBox"){
+        delete coordinates[button_id]
+    }
+    if("children" in node) {
+        for (var child_idx in node.children) {
+            var child_id = node.children[child_idx];
+            deleteDag(child_id);
+        }
+    }
+    if("options" in node){
+        for (var child_idx in node.options) {
+            var child_id = node.options[child_idx];
+            deleteDag(child_id);
+        }
+
+    }
+    $("#"+button_id).remove();
+//    if (button_id != 'anchor') {
+//        $(this).remove();
+//    }
+
+}
+
+
+function getAmazonData() {
+    var answers_wrapper = {};
+    var items = [];
+    var para = window.location.search.substr(1).split("&");
+    for (var j = 0; j < para.length; j++) {
+        var key = para[j].split("=")[0];
+        var val = para[j].split("=")[1];
+        items[key] = val;
+    }
+    //document.getElementById("assignmentId").value = items["assignmentId"];
+    //document.getElementById("hitId").value = items["hitId"];
+    answers_wrapper["assignment"] = answers;
+    if ($("#suggestion_text").val().length > 0) {
+        answers_wrapper["suggestion"] = $("#suggestion_text").val();
+    }
+    //answers_wrapper["assignment_id"] = items["assignmentId"];
+    //answers_wrapper["worker_id"] = items["workerId"];
+    //answers_wrapper["hit_id"] = items["hitId"];
+    document.getElementById("jsonObject").value = JSON.stringify(answers_wrapper);
+}
+
+function saveInputs(current_answer) {
+    $(":input:checked").each(function () {
+        $(this).prop('checked', false);
+        var this_id = $(this).attr('name');
+        if (!(this_id in current_answer)) {
+            current_answer[this_id] = {}
+        }
+        if ($(this).is(':checkbox')) {
+            if (!('checkbox' in current_answer[this_id])) {
+                current_answer[this_id]['checkbox'] = []
+            }
+            current_answer[this_id]['checkbox'].push($(this).val())
+        }
+        if ($(this).is(':radio')) {
+            current_answer[this_id]['radio'] = $(this).val()
+        }
+    });
+}
+function saveData(i) {
+    var current_answer = {};
+    
+    coordinates = {};
+    current_answer['question_id'] = data[i].question_id
+    //end dirty check
+    if ((isEmptyObject(current_answer))) {
+        answers[i] = null;
+    }
+    else {
+        answers[i] = current_answer;
+    }
+}
+
+function buttonRefresh(i) {
+    $("#submit-button").hide();
+    $("#next-button").show();
+    $("#back-button").hide();
+    $("#suggestion_box").hide();
+    if (i > 0) {
+        $("#back-button").show();
+    }
+    if (data.length == 1 || i == data.length - 1) {
+        $("#next-button").hide();
+        $("#submit-button").show();
+        $("#suggestion_box").show();
+    }
+
+}
+function initializeTooltips() {
+    $('[data-toggle="tooltip"]').tooltip(); //initializes the tooltips
+    if ($("[data-toggle=tooltip]").length) {
+        $("[data-toggle=tooltip]").tooltip();
+    }
+
+}
+function resetFormat() {
+    $(".arch_groups").hide();
+}
+
+function loadQuestionFormat(i) {
+    $('.question_counter').text(data.length - i - 1 + " questions left");
+}
+
+function reorderDivs(i) {
+    var dag = data[i];
+    var root_id = dag.root;
+    dynamicGenerateGraph(dag, root_id, "anchor")
+}
+
+function dynamicGenerateGraph(dag, root_id, anchor_id) {
+    var node = dag[root_id];
+    if (node.type == "TextBox") {
+        var html_template = generate_textbox(node, root_id);
+        $("#"+anchor_id).after(html_template);
+    }
+    if (node.hidden) {
+        $("#" + anchor_id).hide();
+    }
+
+    var prior_child_id = root_id;
+
+    if (node.children) {
+        for (var child_node_idx in node.children) {
+            dynamicGenerateGraph(dag, node.children[child_node_idx], prior_child_id);
+            prior_child_id = node.children[child_node_idx];
+
+        }
+    }
+}
+
+function output(inp) {
+    document.body.appendChild(document.createElement('pre')).innerHTML = inp;
+}
+
+function syntaxHighlight(json) {
+    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        var cls = 'number';
+        if (/^"/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'key';
+            } else {
+                cls = 'string';
+            }
+        } else if (/true|false/.test(match)) {
+            cls = 'boolean';
+        } else if (/null/.test(match)) {
+            cls = 'null';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+    });
+}
+
+function init() {
+    buttonRefresh(i);
+    initializeTooltips();
+    resetFormat();
+    reorderDivs(i);
+    //dynamicGenerateGraph(data[i])
+    loadQuestionFormat(i);
+}
+
+
+function isEmptyObject(obj) {
+    for (var prop in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function set_html(elementID, html) {
+    $("#" + elementID).innerHTML(html)
+}
+
+function clear_html() {
+    $("#dynamic").children().each(function () {
+        if ($(this).attr('id') != 'anchor') {
+            $(this).remove();
+        }
+    });
+}
+
+function generate_textbox(TextBox, opencrowd_id){
+    var textbox_html = "";
+    textbox_html += ('<div id="' + opencrowd_id + '"');
+    textbox_html += (' class="arch_groups row animated fadeInUp bs-callout bs-callout-' + TextBox.callout_type + '">');
+    if(TextBox.main_title){
+        textbox_html += ('<h4>' + TextBox.main_title + '</h4>');
+    }
+    for(var idx = 0; idx < TextBox.text.length; idx++){
+        textbox_html += ('<p>' + TextBox.text[idx] + '</p>');
+    }
+    textbox_html += ('</div>');
+    return textbox_html;
+}
+
+</script>
+</div>
+
+</body>
+        </html>
+        ]]>
+    </HTMLContent>
+    <FrameHeight>900</FrameHeight>
+</HTMLQuestion>
+
+

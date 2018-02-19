@@ -1,0 +1,7 @@
+<div class="animated bounceInRight">
+    <div class="container">
+        {% for section in Instruction.sections %}
+            {{ section.render() }}
+        {% endfor %}
+    </div>
+</div>

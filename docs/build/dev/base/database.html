@@ -1,0 +1,211 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Database &#8212; opencrowd 1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Crowdsourcing Assistance for Academics" href="../academics.html" />
+    <link rel="prev" title="Amazon Mechanical Turk" href="amazon_mechanical_turk.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="database">
+<span id="id1"></span><h1>Database<a class="headerlink" href="#database" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-opencrowd.model.database"></span><span class="target" id="module-database"></span><p>A virtualized class for storing opencrowd components</p>
+<dl class="class">
+<dt id="opencrowd.model.database.Database">
+<em class="property">class </em><code class="descclassname">opencrowd.model.database.</code><code class="descname">Database</code><span class="sig-paren">(</span><em>db_host</em>, <em>db_port</em><span class="sig-paren">)</span><a class="headerlink" href="#opencrowd.model.database.Database" title="Permalink to this definition">¶</a></dt>
+<dd><p>The values below will generally default from opencrowd.config.redis</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>db_host</strong> (<em>str</em>) – database ip address</li>
+<li><strong>db_port</strong> (<em>int</em>) – port number to access on the database</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="opencrowd.model.database.Database.connect">
+<code class="descname">connect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opencrowd.model.database.Database.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Currently connects to a redis host.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencrowd.model.database.Database.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#opencrowd.model.database.Database.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete the key and its associated value from the database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>key</strong> (<em>str</em>) – key and associated value to delete</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencrowd.model.database.Database.exists">
+<code class="descname">exists</code><span class="sig-paren">(</span><em>opencrowd_id</em><span class="sig-paren">)</span><a class="headerlink" href="#opencrowd.model.database.Database.exists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if an opencrowd object exists</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>opencrowd_id</strong> (<em>str</em>) – HEADER + id of the object to lookup</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True or False</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencrowd.model.database.Database.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#opencrowd.model.database.Database.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unpickle the value from the database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>key</strong> (<em>str</em>) – Key to unpickle (HEADER + opencrowd_id)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="opencrowd.model.database.Database.set">
+<code class="descname">set</code><span class="sig-paren">(</span><em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#opencrowd.model.database.Database.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pickles the value and sets the database based on k:v</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>key</strong> (<em>str</em>) – the access key to store the value under (HEADER +        opencrowd_id)</li>
+<li><strong>value</strong> (<em>object</em>) – value to store under the access key</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">opencrowd</a></h1>
+
+
+
+<p class="blurb">easy, powerful, opensource crowdsourcing</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=michaelromero&repo=config&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<a href="../../index.html">
+    <p></p>
+</a>
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial (for developers)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Philosophy &amp; License</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="base.html">Base Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../academics.html">Crowdsourcing Assistance for Academics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../future.html">Future Work</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use Cases</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="base.html">Base Components</a><ul>
+      <li>Previous: <a href="amazon_mechanical_turk.html" title="previous chapter">Amazon Mechanical Turk</a></li>
+      <li>Next: <a href="../academics.html" title="next chapter">Crowdsourcing Assistance for Academics</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Michael Romero.
+      
+      |
+      <a href="../../_sources/dev/base/database.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

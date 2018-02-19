@@ -1,0 +1,8 @@
+<div id="{{ TextBox.opencrowd_id }}" class="arch_groups row animated fadeInUp bs-callout bs-callout-{{ TextBox['callout_type'] }}">
+    {% if TextBox['main_title'] %}
+    <h4>{{ TextBox.main_title }}</h4>
+    {% endif %}
+    {% for text in TextBox['text'] %}
+    <p>{{ text }}</p>
+    {% endfor %}
+</div>

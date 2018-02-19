@@ -1,0 +1,208 @@
+.col-md-3 {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.col-md-4 {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.col-md-6 {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.col-md-12 {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+ul {
+    padding: 0;
+}
+
+#site-header {
+    background: #20c063;
+    color: #fff;
+}
+
+.navbar-brand {
+    background: url(http://static.trulia-cdn.com/images/logos/standardized/v2/Trulia_Logo_Reverse_White.svg) no-repeat;
+    background-size: 80px 25px;
+    background-position: 0 center;
+    display: block;
+    height: 45px;
+    line-height: 45px;
+    text-indent: -9999px;
+    width: 80px;
+}
+
+#mturk_form ul {
+    list-style: none;
+}
+
+.items-compared {
+    text-align: center;
+}
+
+.items-compared img {
+    height: auto;
+    width: auto;
+    margin: 20px auto;
+    max-height: 500px;
+}
+
+.items-compared p {
+    background: #f3f3f3;
+    border: solid 2px #252525;
+    color: #252525;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 40px auto 20px auto;
+    padding: 4%;
+    width: 80%;
+}
+
+.select-answer li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-right-width: 5px;
+    border-radius: 3px;
+}
+
+.bs-callout h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.bs-callout p:last-child {
+    margin-bottom: 0;
+}
+
+.bs-callout code {
+    border-radius: 3px;
+}
+
+.bs-callout + .bs-callout {
+    margin-top: -5px;
+}
+
+.bs-callout-default {
+    border-left-color: #777;
+}
+
+.bs-callout-default h4 {
+    color: #777;
+}
+
+.bs-callout-primary {
+    border-left-color: #428bca;
+    border-right-color: #428bca;
+
+}
+
+.bs-callout-primary h4 {
+    color: #428bca;
+}
+
+.bs-callout-success {
+    border-left-color: #5cb85c;
+}
+
+.bs-callout-success h4 {
+    color: #5cb85c;
+}
+
+.bs-callout-danger {
+    border-left-color: #d9534f;
+}
+
+.bs-callout-danger h4 {
+    color: #d9534f;
+}
+
+.bs-callout-warning {
+    border-left-color: #f0ad4e;
+}
+
+.bs-callout-warning h4 {
+    color: #f0ad4e;
+}
+
+.bs-callout-info {
+    border-left-color: #5bc0de;
+    border-right-color: #5bc0de;
+
+}
+
+.bs-callout-info h4 {
+    color: #5bc0de;
+}
+
+.fixed_element_bottom {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}
+
+.dark_blue_info {
+    padding: 15px;
+    margin: 10px;
+    margin-bottom: 20px;
+    color: #fff;
+    background-color: #5bc0de;
+    border: 1px solid #46b8da;
+    border-radius: 4px;
+}
+
+.blue_info {
+    padding: 15px;
+    margin: 10px;
+    color: #31708f;
+    background-color: #d9edf7;
+    border: 1px solid #bce8f1;
+    border-radius: 4px;
+}
+
+.jcrop-box {
+    outline: 1px #17f900 solid;
+}
+
+.jcrop-box:focus {
+    outline: 1px #F90C00 solid;
+}
+
+pre {
+    outline: 1px solid #ccc;
+    padding: 5px;
+    margin: 5px;
+}
+
+.string {
+    color: green;
+}
+
+.number {
+    color: darkorange;
+}
+
+.boolean {
+    color: blue;
+}
+
+.null {
+    color: magenta;
+}
+
+.key {
+    color: red;
+}
+

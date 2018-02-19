@@ -1,0 +1,28 @@
+<div id="{{ InputGroup.opencrowd_id }}"
+     style="margin: 10px;"
+     class="arch_groups row animated fadeInUp">
+    {% if InputGroup.options %}
+        {% set column_size = 6 %}
+        {% if InputGroup.options|length >= 6 %}{% set column_size = 4 %}{% endif %}
+        {% if InputGroup.options|length >= 12 %}{% set column_size = 3 %}{% endif %}
+        {% for option in InputGroup.options %}
+            <div class="col-md-{{ column_size }}">{# {{ option.link }}">  #}
+                <label class="btn btn-default"
+                       data-toggle="tooltip"
+                       data-placement="right"
+                       title="{{ option.on_hover }}">
+                    <input
+                            type="{{ InputGroup.input_type }}"
+                            name="{{ InputGroup.opencrowd_id }}"
+                            data-link="{{ option.link }}"
+                            {% if option.link %}
+                            onclick="showDiv($(this).attr('data-link'))"
+                            {% endif %}
+                            value="{{ option.value }}">
+                    {{ option.text }}
+                </label>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+

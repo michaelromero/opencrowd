@@ -1,0 +1,178 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Question &#8212; opencrowd 1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Sections" href="sections.html" />
+    <link rel="prev" title="Assignment" href="assignment.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="question">
+<span id="id1"></span><h1>Question<a class="headerlink" href="#question" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-opencrowd.model.base.question"></span><span class="target" id="module-question"></span><p>A question is made up of sections. When sections are added to a question, the question will
+begin to generate a directed graph structure. The question needs to be stored in a Task object, which
+generates HIT objects from the question pool. The question will pass the graph structure to the HIT,
+which passes it to the HTML that is passed to the crowdsource.</p>
+<p>Example usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">opencrowd</span>
+
+<span class="n">question</span> <span class="o">=</span> <span class="n">Question</span><span class="p">()</span>
+
+<span class="c1"># sections previously created, ex: images = Image(urls=[img[0], img[1]])</span>
+<span class="c1"># make sure you specify a parent</span>
+<span class="n">question</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">)</span>
+
+<span class="c1"># attach to a task</span>
+</pre></div>
+</div>
+<p><em>Module author: Michael Romero &lt;<a class="reference external" href="mailto:michaelrom&#37;&#52;&#48;zillowgroup&#46;com">michaelrom<span>&#64;</span>zillowgroup<span>&#46;</span>com</a>&gt;</em></p>
+<dl class="class">
+<dt id="opencrowd.model.base.question.Question">
+<em class="property">class </em><code class="descclassname">opencrowd.model.base.question.</code><code class="descname">Question</code><a class="headerlink" href="#opencrowd.model.base.question.Question" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and manage a new Question.</p>
+<dl class="method">
+<dt id="opencrowd.model.base.question.Question.add_section">
+<code class="descname">add_section</code><span class="sig-paren">(</span><em>section</em>, <em>parents=None</em><span class="sig-paren">)</span><a class="headerlink" href="#opencrowd.model.base.question.Question.add_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a section to the question. If Parent is ‘prev’, the Question
+will automatically add the previous section as the parent of the
+newly added section, creating a linear DAG. Else, if parents is a
+list, the new section will be rendered after each parent.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>section</strong> (<a class="reference internal" href="sections.html#opencrowd.model.section.section.Section" title="opencrowd.model.section.section.Section"><em>Section</em></a>) – Section to add, see note below</li>
+<li><strong>parents</strong> (<em>[</em><a class="reference internal" href="sections.html#opencrowd.model.section.section.Section" title="opencrowd.model.section.section.Section"><em>Section</em></a><em>]</em>) – parents of this section</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<dl class="last docutils">
+<dt>the section parameter can only take the following:</dt>
+<dd><ul class="first last simple">
+<li>‘root’: specifies this as the head of the graph structure</li>
+<li>‘prev’: use the previous section as the parent</li>
+<li>[Sections] or Section: use the section(s) as parents</li>
+</ul>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">opencrowd</a></h1>
+
+
+
+<p class="blurb">easy, powerful, opensource crowdsourcing</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=michaelromero&repo=config&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<a href="../../index.html">
+    <p></p>
+</a>
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial (for developers)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Philosophy &amp; License</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="base.html">Base Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../academics.html">Crowdsourcing Assistance for Academics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../future.html">Future Work</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use_cases.html">Use Cases</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="base.html">Base Components</a><ul>
+      <li>Previous: <a href="assignment.html" title="previous chapter">Assignment</a></li>
+      <li>Next: <a href="sections.html" title="next chapter">Sections</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Michael Romero.
+      
+      |
+      <a href="../../_sources/dev/base/question.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

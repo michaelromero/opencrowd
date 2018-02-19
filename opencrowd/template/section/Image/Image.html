@@ -1,0 +1,29 @@
+{% set num_of_images = Image.urls|length %}
+{% if num_of_images == 1 %}
+    {% set column_size = 12 %}
+{% elif num_of_images == 2 %}
+    {% set column_size = 6 %}
+{% elif num_of_images == 3 %}
+    {% set column_size = 4 %}
+{% elif num_of_images == 4 %}
+    {% set column_size = 3 %}
+{% elif num_of_images == 6 %}
+    {% set column_size = 2 %}
+{% else %}
+    {% set column_size = 3 %}
+{% endif %}
+
+
+<div id="{{ Image.opencrowd_id }}"
+     style="padding-left: 0; padding-right: 0;"
+     class="row arch_groups image_{{ Image.urls|length }} animated fadeInUp">
+    {% for url in Image.urls %}
+        {# <div style="border: 1px solid #8e8f91; border-radius: 4px; height: auto; overflow: auto; padding-left: 0; padding-right: 0;" #}
+        <div class="col-md-{{ column_size }} center-block"> <a class="thumbnail">
+                <img id="{{ Image.opencrowd_id }}_{{ loop.index0 }}"
+                     style="max-height: 400px; width: auto;"
+                     class="img-responsive"
+                     src="{{ url }}"/></a>
+        </div>
+    {% endfor %}
+</div>

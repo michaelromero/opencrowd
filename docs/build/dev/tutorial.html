@@ -1,0 +1,221 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Tutorial (for developers) &#8212; opencrowd 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Philosophy &amp; License" href="intro.html" />
+    <link rel="prev" title="opencrowd" href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tutorial-for-developers">
+<h1>Tutorial (for developers)<a class="headerlink" href="#tutorial-for-developers" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="using-the-library-directly">
+<h2>Using the library directly<a class="headerlink" href="#using-the-library-directly" title="Permalink to this headline">¶</a></h2>
+<p>opencrowd was built to be easy to use inside of a python environment.</p>
+<p>First generate the opencrowd server:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">opencrowd</span>
+
+<span class="n">oc</span> <span class="o">=</span> <span class="n">opencrowd</span><span class="o">.</span><span class="n">Opencrowd</span><span class="o">.</span><span class="n">regenerate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Now generate a project object:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># CROWDSOURCE_SPECIFICATION is defined in opencrowd.config.opencrowd</span>
+<span class="n">project</span> <span class="o">=</span> <span class="n">oc</span><span class="o">.</span><span class="n">add_project</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">Project</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Bounding Box: Bathroom Toilets&#39;</span><span class="p">,</span>
+                                <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Have workers draw bounding boxes around toilets&#39;</span><span class="p">,</span>
+                                <span class="n">crowdsource</span><span class="o">=</span><span class="n">CROWDSOURCE_SPECIFICATION</span><span class="p">))</span> <span class="c1"># specification is config specific</span>
+</pre></div>
+</div>
+<p>opencrowd will now be tracking this project. Now, we will create a task and attach it to the project. The task will
+be comprised of 5 <strong>sections</strong>: <strong>collapsible instructions</strong>, which can have embedded HTML, a <strong>textbox</strong> specifying the question, a
+<strong>bounding box</strong> to gather data, a <strong>textbox</strong> section matched to a <strong>radio input group</strong> that potentially leads to another <strong>checkbox input group</strong> section.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">task</span> <span class="o">=</span> <span class="n">Task</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">potential_bathroom_images</span><span class="p">:</span>
+    <span class="c1"># create the unique sections so opencrowd can id and link them dynamically</span>
+    <span class="c1">###############</span>
+    <span class="n">collapsable_instructions</span> <span class="o">=</span> <span class="n">CollapsePanel</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Instructions&quot;</span><span class="p">,</span>
+                                   <span class="n">body</span><span class="o">=</span><span class="s2">&quot;General text instructions can go here, along with HTML&quot;</span><span class="p">,</span>
+                                   <span class="n">footer</span><span class="o">=</span><span class="s2">&quot;Same&quot;</span><span class="p">)</span>
+    <span class="n">bounding_box_textbox_instruction</span> <span class="o">=</span> <span class="n">TextBox</span><span class="p">(</span><span class="n">main_title</span><span class="o">=</span><span class="s1">&#39;Draw a box over the sink&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;example paragraph&#39;</span><span class="p">,</span> <span class="s1">&#39;example paragraph&#39;</span><span class="p">])</span>
+    <span class="n">bounding_box</span> <span class="o">=</span> <span class="n">BoundingBox</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://lorempixel.com/800/400/nature&quot;</span><span class="p">)</span>
+
+    <span class="n">radio_group_instruction</span> <span class="o">=</span> <span class="n">TextBox</span><span class="p">(</span><span class="n">main_title</span><span class="o">=</span><span class="s1">&#39;Does the image have a shower?&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Not only a shower, but a bath also counts&#39;</span><span class="p">])</span>
+
+    <span class="c1"># a radio group first needs to be composed of options (buttons)</span>
+    <span class="n">shower_button</span> <span class="o">=</span> <span class="n">Option</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;Yes&#39;</span><span class="p">,</span> <span class="n">on_hover</span><span class="o">=</span><span class="s1">&#39;hover text here&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;shower&#39;</span><span class="p">,</span> <span class="n">correct</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+    <span class="n">no_shower_button</span> <span class="o">=</span> <span class="n">Option</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="n">on_hover</span><span class="o">=</span><span class="s1">&#39;hover text here&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;no_shower&#39;</span><span class="p">,</span> <span class="n">correct</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+    <span class="n">shower_radio_group</span> <span class="o">=</span> <span class="n">RadioGroup</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="n">shower_button</span><span class="p">,</span> <span class="n">no_shower_button</span><span class="p">])</span>
+
+    <span class="n">spout_checkbox</span> <span class="o">=</span> <span class="n">Option</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;Shower with a spout&#39;</span><span class="p">,</span> <span class="n">on_hover</span><span class="o">=</span><span class="s1">&#39;...&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;spout&#39;</span><span class="p">,</span> <span class="n">correct</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+    <span class="n">tub_checkbox</span> <span class="o">=</span> <span class="n">Option</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;Bath tub shape&#39;</span><span class="p">,</span> <span class="n">on_hover</span><span class="o">=</span><span class="s1">&#39;...&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;tub&#39;</span><span class="p">,</span> <span class="n">correct</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+    <span class="n">bathroom_checkbox_group</span> <span class="o">=</span> <span class="n">CheckboxGroup</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="n">spout_checkbox</span><span class="p">,</span> <span class="n">tub_checkbox</span><span class="p">])</span>
+    <span class="c1"># link the shower radio button to the above checkbox group</span>
+    <span class="n">shower_button</span><span class="o">.</span><span class="n">add_children</span><span class="p">(</span><span class="n">bathroom_checkbox_group</span><span class="p">)</span>
+
+    <span class="c1">################</span>
+
+    <span class="c1"># attach these unique objects to a question</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">Question</span><span class="p">()</span>
+    <span class="n">question</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">collapsable_instructions</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">)</span>
+    <span class="n">question</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">bounding_box_textbox_instruction</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="n">collapsable_instructions</span><span class="p">)</span>
+    <span class="n">question</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">bounding_box</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="n">bounding_box_textbox_instruction</span><span class="p">)</span>
+    <span class="n">question</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">radio_group_instruction</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="n">bounding_box</span><span class="p">)</span>
+    <span class="n">question</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">shower_radio_group</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="n">radio_group_instruction</span><span class="p">)</span>
+    <span class="n">question</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">bathroom_checkbox_group</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+    <span class="c1"># add the question to the task question pool</span>
+    <span class="n">task</span><span class="o">.</span><span class="n">add_question</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A single Question from this Task will be rendered as:</p>
+<img alt="../_images/tutorial_render.png" src="../_images/tutorial_render.png" />
+<p>When the user clicks next, they’ll move on the next question. Now, attach the
+task to the project. Prior to generating the HITs inside a task, the task must
+be attached to a project:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">project</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+<span class="n">task</span><span class="o">.</span><span class="n">create_HITs</span><span class="p">(</span><span class="n">questions_per_assignment</span><span class="o">=</span><span class="n">num_questions</span><span class="p">,</span>
+<span class="n">assignments_per_HIT</span><span class="o">=</span><span class="n">num_assignments</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now that a project has a task with unsubmitted HITs inside of it:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">project</span><span class="o">.</span><span class="n">submit_tasks</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Straightforward! To update a project, its’ underlying tasks, and by extension
+its HITs:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">oc</span><span class="o">.</span><span class="n">update</span><span class="p">()</span> <span class="c1"># the opencrowd server object</span>
+</pre></div>
+</div>
+<p>To get a handle on what’s going on, let’s view all of the objects we’ve
+created:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="s2">&quot;Project Ids: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">opencrowd</span><span class="o">.</span><span class="n">list_project_ids</span><span class="p">())</span>
+<span class="k">print</span> <span class="s2">&quot;Task Ids: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">opencrowd</span><span class="o">.</span><span class="n">list_task_ids</span><span class="p">())</span>
+<span class="k">print</span> <span class="s2">&quot;HIT Ids: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">opencrowd</span><span class="o">.</span><span class="n">list_HIT_ids</span><span class="p">())</span>
+<span class="k">print</span> <span class="s2">&quot;Assignment IDs: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">opencrowd</span><span class="o">.</span><span class="n">list_assignment_ids</span><span class="p">())</span>
+<span class="k">print</span> <span class="s2">&quot;Question IDs: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">opencrowd</span><span class="o">.</span><span class="n">list_question_ids</span><span class="p">())</span>
+<span class="k">print</span> <span class="s2">&quot;Section IDs: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">opencrowd</span><span class="o">.</span><span class="n">list_section_ids</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Finally, to view workers’ answers, let’s collect all the assignments together:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">responses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">assignment</span> <span class="ow">in</span> <span class="n">oc</span><span class="o">.</span><span class="n">get_assignment_objects</span><span class="p">():</span>
+  <span class="n">responses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">oc</span><span class="o">.</span><span class="n">generate_response</span><span class="p">(</span><span class="n">assignment</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The assignments themselves must first be transformed into response objects for
+parsing. From here, the responses can be json dumped.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="n">responses</span><span class="p">:</span>
+  <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">dump</span><span class="p">(),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">opencrowd</a></h1>
+
+
+
+<p class="blurb">easy, powerful, opensource crowdsourcing</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=michaelromero&repo=config&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<a href="../index.html">
+    <p></p>
+</a>
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial (for developers)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Philosophy &amp; License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base/base.html">Base Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="academics.html">Crowdsourcing Assistance for Academics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="future.html">Future Work</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use_cases.html">Use Cases</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="previous chapter">opencrowd</a></li>
+      <li>Next: <a href="intro.html" title="next chapter">Philosophy &amp; License</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Michael Romero.
+      
+      |
+      <a href="../_sources/dev/tutorial.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

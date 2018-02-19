@@ -1,0 +1,209 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>opencrowd &#8212; opencrowd 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tutorial (for developers)" href="dev/tutorial.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="opencrowd">
+<h1>opencrowd<a class="headerlink" href="#opencrowd" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="easy-powerful-crowdsourcing">
+<h2>Easy, powerful crowdsourcing<a class="headerlink" href="#easy-powerful-crowdsourcing" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dev/tutorial.html">Tutorial (for developers)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/intro.html">Philosophy &amp; License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/base/base.html">Base Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/academics.html">Crowdsourcing Assistance for Academics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/future.html">Future Work</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/use_cases.html">Use Cases</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="opencrowd-structure">
+<h1>opencrowd structure<a class="headerlink" href="#opencrowd-structure" title="Permalink to this headline">¶</a></h1>
+<p>opencrowd begins with a <a class="reference internal" href="dev/base/project.html#project"><span class="std std-ref">Project</span></a>. A Project focuses around a specific goal, like image classification or sentiment analysis.</p>
+<p>A Project contains <a class="reference internal" href="dev/base/task.html#task"><span class="std std-ref">Tasks</span></a>. A Task is meant to differentiate between experiments.</p>
+<p>A Task contains <a class="reference internal" href="dev/base/question.html#question"><span class="std std-ref">Questions</span></a>. In this case, consider a Question to be an entire page that will be viewed in the browser by a worker.</p>
+<p>Questions are composed of <a class="reference internal" href="dev/base/sections.html#sections"><span class="std std-ref">Sections</span></a>. A Section can be represented by many different components, and they’re chained together to form an HTML document in a Question. For example, a text box</p>
+<dl class="docutils">
+<dt>opencrowd currently supports the following sections, each with specific configurations and nuances:</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="dev/base/sections.html#bounding-box"><span class="std std-ref">Bounding Box</span></a></li>
+<li><a class="reference internal" href="dev/base/sections.html#collapse-panel"><span class="std std-ref">Collapsible Instruction Panel</span></a></li>
+<li><a class="reference internal" href="dev/base/sections.html#image"><span class="std std-ref">Images</span></a></li>
+<li><a class="reference internal" href="dev/base/sections.html#input-group"><span class="std std-ref">Input Groups</span></a></li>
+<li><a class="reference internal" href="dev/base/sections.html#text-box"><span class="std std-ref">Text Boxes</span></a></li>
+</ul>
+</dd>
+</dl>
+<p>Crowdsourcing platform with API interface that allows collection of human work via <a class="reference external" href="https://www.mturk.com/mturk/welcome">Amazon Mechanical Turk</a>. The platform focuses on generalized construction of tasks, and provides a full pipeline for creation, retrieval, and analysis for a variety of data-gathering tasks.
+These tasks could range from data collection and verification for machine learning like labels for image classification, image quality, bounding boxes for object detection, etc, to possibly other non-machine learning use cases where human judgement is needed.
+Usually creating a crowd sourcing task requires a good understanding of AMT (using an API framework, or the more limiting online front-end): worker management, creating-submitting-retrieving-evaluating tasks, designing templates, etc., which often requires time and prior experience.
+This crowd sourcing platform resolves these issues by providing an interface that abstracts the complexities of crowd sourcing tasks and makes it simple for users to define new tasks while leveraging the same platform for worker evaluation and answer processing.</p>
+</div>
+<div class="section" id="example-for-developers">
+<h1>Example (For Developers)<a class="headerlink" href="#example-for-developers" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="pairwise-image-comparison">
+<h2>Pairwise Image Comparison<a class="headerlink" href="#pairwise-image-comparison" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">opencrowd</span>
+
+<span class="c1"># create a Project</span>
+<span class="n">project</span> <span class="o">=</span> <span class="n">opencrowd</span><span class="o">.</span><span class="n">add_project</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">Project</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Pairwise Image Comparison&#39;</span><span class="p">,</span>
+                                <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Compare two images against different criteria&#39;</span><span class="p">,</span>
+                                <span class="n">crowdsource</span><span class="o">=</span><span class="n">CROWDSOURCE_SPECIFICATION</span><span class="p">))</span>
+
+<span class="c1"># separate similar experiments from each other via Tasks</span>
+<span class="n">task</span> <span class="o">=</span> <span class="n">opencrowd</span><span class="o">.</span><span class="n">task</span><span class="p">()</span>
+
+<span class="c1"># gather input data</span>
+<span class="c1"># in this case, the images to compare are sequentially ordered in a txt file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;comparison_images.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">urls</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+<span class="c1"># parse the pairs</span>
+<span class="n">pairs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">urls</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="n">pairs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">urls</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">urls</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+
+<span class="c1"># for each pair, let&#39;s design a Question</span>
+<span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">:</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">Question</span><span class="p">()</span>
+    <span class="c1"># Generate unique Question layout via Sections:</span>
+    <span class="c1"># Instructions</span>
+    <span class="c1"># Images side by side</span>
+    <span class="c1"># Radio buttons to select which is better</span>
+    <span class="n">instruction</span> <span class="o">=</span> <span class="n">TextBox</span><span class="p">(</span><span class="n">main_title</span><span class="o">=</span><span class="s1">&#39;Which image is more aesthetically pleasing?&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Blah blah objective&#39;</span><span class="p">,</span> <span class="s1">&#39;Blah blah subjective&#39;</span><span class="p">])</span>
+    <span class="n">images</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">urls</span><span class="o">=</span><span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+    <span class="n">option_a</span> <span class="o">=</span> <span class="n">Option</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;The left image is better&#39;</span><span class="p">,</span> <span class="n">on_hover</span><span class="o">=</span><span class="s1">&#39;The left image is more aesthetically pleasing than the right&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">correct</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+    <span class="n">option_b</span> <span class="o">=</span> <span class="n">Option</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;The right image is better&#39;</span><span class="p">,</span> <span class="n">on_hover</span><span class="o">=</span><span class="s1">&#39;The right image is more aesthetically pleasing than the left&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">correct</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+    <span class="c1"># attach the above options to the radio group</span>
+    <span class="n">radio</span> <span class="o">=</span> <span class="n">RadioGroup</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="n">option_a</span><span class="p">,</span> <span class="n">option_b</span><span class="p">])</span>
+
+    <span class="c1"># Add the sections in order</span>
+    <span class="n">question</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">)</span>
+    <span class="n">question</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="n">instruction</span><span class="p">)</span>
+    <span class="n">question</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">radio</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="n">images</span><span class="p">)</span>
+    <span class="c1"># attach the question to the task</span>
+    <span class="n">task</span><span class="o">.</span><span class="n">add_question</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+<span class="c1"># attach the task to the project</span>
+<span class="n">project</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+<span class="c1"># generate the HITs (Human Intelligence Tasks) inside of the task</span>
+<span class="n">task</span><span class="o">.</span><span class="n">create_HITs</span><span class="p">(</span><span class="n">questions_per_assignment</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">assignments_per_HIT</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1"># submit them to the crowd</span>
+<span class="n">project</span><span class="o">.</span><span class="n">submit_tasks</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/comparison_render.png" src="_images/comparison_render.png" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">opencrowd</a></h1>
+
+
+
+<p class="blurb">easy, powerful, opensource crowdsourcing</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=michaelromero&repo=config&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<a href="#">
+    <p></p>
+</a>
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dev/tutorial.html">Tutorial (for developers)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/intro.html">Philosophy &amp; License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/base/base.html">Base Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/academics.html">Crowdsourcing Assistance for Academics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/future.html">Future Work</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/use_cases.html">Use Cases</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="dev/tutorial.html" title="next chapter">Tutorial (for developers)</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Michael Romero.
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
